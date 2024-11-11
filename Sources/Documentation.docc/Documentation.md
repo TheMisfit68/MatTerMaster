@@ -10,6 +10,8 @@ A parent script `MatterDevelopmentSetup` that sets up the environment in the ter
 A subscript `MatterDevelopmentInstaller` to install all necessary tools and SDK's.
 A subscript `MatterDevelopmentUserAliases` to add user defined aliases to the terminal profile.
 
+Additionally there is a placeholder for a Swift command plugin 
+that will be used in the future to try and automate certain actions in the Matter projects that will add this pacakage as a dependency.
 
 ### <!--@START_MENU_TOKEN@-->Group<!--@END_MENU_TOKEN@-->
 

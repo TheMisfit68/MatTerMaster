@@ -14,8 +14,8 @@ struct MatTerMasterTest: CommandPlugin {
 	func buildFromTerminal(context: PluginContext) throws{
 		debugPrint("Calling command in terminal")
 	
-		let output: String = "The result of some future terminal command"
-		print(output)
+		let terminalOutput: String = "The result of some future terminal command"
+		print(terminalOutput)
 	}
 }
 
