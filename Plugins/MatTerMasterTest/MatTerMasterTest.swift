@@ -5,15 +5,14 @@ import Foundation
 struct MatTerMasterTest: CommandPlugin {
 	
 	/// This entry point is called when operating on a Swift package.
-	func performCommand(context: PluginContext, arguments: [String]) throws {
-		debugPrint("Building package with context: \(context)")
-		
+	func performCommand(context: PluginContext, arguments: [String]) throws {		
 		try buildFromTerminal(context: context)
 	}
 	
 	func buildFromTerminal(context: PluginContext) throws{
-		debugPrint("Calling command in terminal")
-	
+		let buildDirectory = context.package.directoryURL
+		print("Performing action on current build: \(buildDirectory)")
+		
 		let terminalOutput: String = "The result of some future terminal command"
 		print(terminalOutput)
 	}
