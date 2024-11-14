@@ -4,10 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>MatTerMaster.xcscheme_^#shared#^_</key>
+		<key>MatTerMaster-Package.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>MatTerMaster.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>MatTerMasterTest.xcscheme_^#shared#^_</key>
 		<dict>
@@ -17,7 +22,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>MatTerBuilder</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>MatTerInstaller</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>MatTerMaster</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>MatTerMasterTest</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>SharedCode</key>
 		<dict>
 			<key>primary</key>
 			<true/>

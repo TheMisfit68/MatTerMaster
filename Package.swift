@@ -7,27 +7,29 @@ let package = Package(
 		.macOS(.v13)
 	],
 	products: [
-		.library(name: "MatTerMaster", targets: ["MatTerMaster"]),
 		.plugin(
-			name: "MatTerMasterTest",
-			targets: ["MatTerMasterTest"]
+			name: "MatTerInstaller",
+			targets: ["MatTerInstaller"]
+		),
+		.plugin(
+			name: "MatTerBuilder",
+			targets: ["MatTerBuilder"]
 		),
 	],
 	targets: [
-		.target(
-			name: "MatTerMaster",
-			resources: [
-				.copy("Resources/ShellScripts")
-			]
-		),
 		.plugin(
-			name: "MatTerMasterTest",
+			name: "MatTerInstaller",
 			capability: .command(
-				intent: .custom(
-					verb: "TestPlugin",
-					description: "Test the plugin capabilities"
-				)
+				intent: .custom( verb: "MatterInstall", description: "Install the toolchain needed for Matter development")
 			)
+		),
+		
+		.plugin(
+			name: "MatTerBuilder",
+			capability: .command(
+				intent: .custom( verb: "MatterBuild", description: "Build a Matter target using idf.py")
+			)			
 		)
+		
 	]
 )
