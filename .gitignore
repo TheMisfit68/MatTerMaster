@@ -1,1 +1,5 @@
-.swiftpm/xcode/package.xcworkspace/xcuserdata/janverrept.xcuserdatad/UserInterfaceState.xcuserstate
+
+# Ignore specific files
+.DS_Store
+.swiftpm
+.swiftpm

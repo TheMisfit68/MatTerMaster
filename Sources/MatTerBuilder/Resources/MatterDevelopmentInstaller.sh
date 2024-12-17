@@ -10,27 +10,24 @@
 check_or_install() {
     local package=$1
     local install_cmd=$2
-
-    # Check for the version directly
-    local version
-    version=$(get_version "$package")
-
-    if [[ "$version" != "unknown" ]]; then
-        echo "✅ $package ($version) is already installed."
-        echo
+    
+    # Check if command is available (for non-brew packages)
+    if [[ "$install_cmd" != *"brew install"* ]]; then
+        if ! command -v "$package" &>/dev/null; then
+            warnAndExitScript "$package is not installed."
+        else
+            echo "✅ $package is already installed."
+            echo
+        fi
     else
-        # Package is not installed, confirm and install
-        confirm_and_install "$package" "$install_cmd"
+        # Check if Homebrew based package is installed
+        if ! brew list "$package" &>/dev/null; then
+            confirm_and_install "$package" "$install_cmd"
+        else
+            echo "✅ $package is already installed."
+            echo
+        fi
     fi
-}
-
-# Function to extract the version number for a package
-get_version() {
-	local cmd=$1
-	# Try --version or -v and extract just the version number
-	"$cmd" --version 2>/dev/null | grep -Eo '[0-9]+(\.[0-9]+)+' || \
-	"$cmd" -v 2>/dev/null | grep -Eo '[0-9]+(\.[0-9]+)+' || \
-	echo "unknown"
 }
 
 # Ask for user confirmation before installing a missing package
@@ -81,11 +78,10 @@ check_Or_install_Xcode_Tools() {
 }
 
 install_Swift_Nightly_Toolchain(){
-
+ # Get the path to the Swift toolchain
     echo "⚙️ Setting the Swift toolchain..."
     echo
 
-	# Get the path to the Swift toolchain
     local toolchain_path
     toolchain_path=$(ls -d ~/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-*-a.xctoolchain 2>/dev/null | head -n 1)
 
@@ -152,8 +148,9 @@ install_ESP_IDF_SDK() {
 
     # Install ESP-IDF if the install script exist
     echo "📦 Installing ESP-IDF SDK..."
-    if [ -f "$ESP_IDF_INSTALL" ]; then
-        "$ESP_IDF_INSTALL" all
+    local esp_idf_install_script="$ESP_IDF_REPO/install.sh"
+    if [ -f "$esp_idf_install_script" ]; then
+        "$esp_idf_install_script" all
         echo "✅ 📦 ESP-IDF SDK installed successfully."
     else
         warnAndExitScript "Install script for ESP-IDF not found."
@@ -169,8 +166,7 @@ install_ESP_Matter_SDK() {
         echo "🐑 Cloning ESP-Matter repository..."
         echo
                 
-       # git clone --branch release/v1.3 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-matter.git --jobs 24
-        git clone --branch release/v1.3 --depth 1 --recursive https://github.com/espressif/esp-matter.git --jobs 24
+        git clone --branch release/v1.3 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-matter.git --jobs 24
 
         echo "✅ 🐑 🐑 ESP-Matter cloned successfully."
         echo
@@ -181,8 +177,9 @@ install_ESP_Matter_SDK() {
 
     # Install ESP-Matter if the install script exist
     echo "📦 Installing ESP-MATTER SDK..."
-    if [ -f "$ESP_MATTER_INSTALL" ]; then
-        "$ESP_MATTER_INSTALL"
+    local esp_matter_install_script="$ESP_MATTER_REPO/install.sh"
+    if [ -f "$esp_matter_install_script" ]; then
+        "$esp_matter_install_script"
         echo "✅ 📦 ESP-Matter SDK installed successfully."
     else
         warnAndExitScript "Install script for ESP-Matter not found."

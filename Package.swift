@@ -7,29 +7,54 @@ let package = Package(
 		.macOS(.v13)
 	],
 	products: [
+//		.executable(
+//			name: "MatTerInstaller",
+//			targets: ["MatTerInstaller"]
+//		),
+//		.executable(
+//			name: "MatTerBuilder",
+//			targets: ["MatTerBuilder"]
+//		),
 		.plugin(
-			name: "MatTerInstaller",
-			targets: ["MatTerInstaller"]
-		),
-		.plugin(
-			name: "MatTerBuilder",
-			targets: ["MatTerBuilder"]
-		),
+			name: "MatTerBuilderPlugin",
+			targets: ["MatTerBuilderPlugin"]
+		)
 	],
 	targets: [
-		.plugin(
+		.executableTarget(
 			name: "MatTerInstaller",
-			capability: .command(
-				intent: .custom( verb: "MatterInstall", description: "Install the toolchain needed for Matter development")
-			)
+			resources: [
+				.process("Resources")
+			]
 		),
-		
-		.plugin(
+		.executableTarget(
 			name: "MatTerBuilder",
+			resources: [
+				.process("Resources")
+			]
+		),
+		.plugin(
+			name: "MatTerBuilderPlugin",
 			capability: .command(
-				intent: .custom( verb: "MatterBuild", description: "Build a Matter target using idf.py")
-			)			
+				intent: .custom(
+					verb: "MatterBuild",
+					description: "Build a Matter target using idf.py"
+				),
+				permissions: [
+					.allowNetworkConnections(
+						scope: .all(),
+						reason: "Needs to connect to ESP-idf"
+					),
+					.writeToPackageDirectory(
+						reason: "The plugin needs to build the Matter target"
+					)
+				]
+			),
+			dependencies: [
+				.target(name: "MatTerBuilder") // Add the dependency on MatTerBuilder
+			]
 		)
-		
 	]
 )
+
+

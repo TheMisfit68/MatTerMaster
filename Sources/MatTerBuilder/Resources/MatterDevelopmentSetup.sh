@@ -15,12 +15,7 @@ SCRIPTS_DIR="$(dirname "$0")"
 ESP_PARENT_DIR="$HOME/esp"
 ESP_TOOLS_DIR="$HOME/.espressif"
 ESP_IDF_REPO="$ESP_PARENT_DIR/esp-idf"
-ESP_IDF_INSTALL="$ESP_IDF_REPO/install.sh"
-ESP_IDF_EXPORT="$ESP_IDF_REPO/export.sh"
 ESP_MATTER_REPO="$ESP_PARENT_DIR/esp-matter"
-ESP_MATTER_INSTALL="$ESP_MATTER_REPO/install.sh"
-ESP_MATTER_EXPORT="$ESP_MATTER_REPO/export.sh"
-
 
 # Source the subscripts for installations
 source "$SCRIPTS_DIR/MatterDevelopmentInstaller.sh"
@@ -36,7 +31,6 @@ warnAndExitScript() {
 	echo "⚠️ $1"
 	echo "⚠️ Please fix the issue and rerun this setup."
 	echo
-	    
 	exit 1
 }
 
@@ -44,32 +38,35 @@ warnAndExitScript() {
 setupMatterEnvironment() {
 	
 	# Enable the cache for quicker recompiling
-	export IDF_CCACHE_ENABLE=1
+	# for now disable it during testing
+#	export IDF_CCACHE_ENABLE=1
 	
 	# Set up the ESP-IDF environment
 	echo
-	if [ -f "$ESP_IDF_EXPORT" ]; then
+	local esp_idf_path="$ESP_IDF_REPO/export.sh"
+	if [ -f "$esp_idf_path" ]; then
 	echo "⚙️ Setting up ESP-IDF environment..."
 	echo
 	cd "$ESP_IDF_REPO"
-	source "$ESP_IDF_EXPORT"
+	source "$esp_idf_path"
 	echo
 	echo "✅ ESP-IDF environment set up."
 	else
-	warnAndExitScript "ESP-IDF setup script not found at $ESP_IDF_EXPORT."
+	warnAndExitScript "ESP-IDF setup script not found at $esp_idf_path."
 	fi
 	consoleSeparator
 	
 	# Set up the ESP-Matter environment
-	if [ -f "$ESP_MATTER_EXPORT" ]; then
+	local esp_matter_path="$ESP_MATTER_REPO/export.sh"
+	if [ -f "$esp_matter_path" ]; then
 	echo "⚙️ Setting up ESP-Matter environment..."
 	echo
 	cd "$ESP_MATTER_REPO"
-	source "$ESP_MATTER_EXPORT"
+	source "$esp_matter_path"
 	echo
 	echo "✅ ESP-Matter environment set up."
 	else
-	warnAndExitScript "ESP-Matter setup script not found at $ESP_MATTER_EXPORT."
+	warnAndExitScript "ESP-Matter setup script not found at $esp_matter_path."
 	fi
 	consoleSeparator
 }
@@ -87,7 +84,7 @@ cleanBuildFolder(){
 buildProjectForBoard() {
 	echo
 	local esp_board_type="${1:-esp32c6}"   # Default to esp32c6 if no first argument is passed
-		
+	
 	# Set the ESP board type
 	echo "⚙️ Setting the target board type to: $esp_board_type ..."
 	echo
@@ -148,7 +145,6 @@ setup_aliases() {
 	alias setup='setupMatterEnvironment'
 	alias clean='cleanBuildFolder'
 	alias build='buildProjectForBoard'
-	alias config='idf.py menuconfig'
 	alias flash='flashFirmware'
 	alias erase='eraseFirmware'
 	
@@ -165,7 +161,7 @@ setup_aliases() {
 	consoleSeparator
 }
 
-# Main script execution starts here
+
 echo "🔧 Setting up the Matter Development environment..."
 echo
 
@@ -179,10 +175,8 @@ setupMatterEnvironment
 # Set up aliases
 setup_aliases
 
-# Navigate to the project Folder
-projectFolder
-
 echo
 echo "✅ 🔧 Setting up the Matter Development completed successfully."
 echo "👍 You can now start your build cycle."
 consoleSeparator
+
