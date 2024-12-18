@@ -20,6 +20,7 @@ alias testapple='navigateTo $HOME/Apple-swift-matter/swift-matter-examples/led-b
 alias testjv='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterTest && clean && build'
 
 # Navigate within my own Matter projects
+alias projectFolder='navigateTo $HOME/JVEmbedded/JVMatter/Sources/'
 alias blinker='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterBlinker'
 alias glower='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterGlower'
 alias button='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterGenericSwitch'
