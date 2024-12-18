@@ -169,9 +169,7 @@ install_ESP_Matter_SDK() {
         echo "🐑 Cloning ESP-Matter repository..."
         echo
                 
-       # git clone --branch release/v1.3 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-matter.git --jobs 24
-        git clone --branch release/v1.3 --depth 1 --recursive https://github.com/espressif/esp-matter.git --jobs 24
-
+        git clone --branch release/v1.3 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-matter.git --jobs 24
         echo "✅ 🐑 🐑 ESP-Matter cloned successfully."
         echo
     else
@@ -179,7 +177,16 @@ install_ESP_Matter_SDK() {
         echo
     fi
 
-    # Install ESP-Matter if the install script exist
+    # Discard all changes in the checked out CHIP-submodule
+    # it sometimes is in a dirty state after cloning the ESP-Matter repository
+    echo "⏬️ Discarding all changes in the GIT submodules..."
+	cd "$ESP_MATTER_REPO/connectedhomeip/connectedhomeip" || exit 1
+	git submodule update --init --recursive
+	git submodule foreach --recursive git reset --hard
+	echo "✅ GIT changes discarded successfully."
+    echo
+
+    # Install ESP-Matter if the install script exists
     echo "📦 Installing ESP-MATTER SDK..."
     if [ -f "$ESP_MATTER_INSTALL" ]; then
         "$ESP_MATTER_INSTALL"
