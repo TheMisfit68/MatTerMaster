@@ -141,7 +141,7 @@ install_ESP_IDF_SDK() {
         echo "🐑 Cloning ESP-IDF repository..."
         echo
         
-        git clone --branch v5.2.1 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-idf.git --jobs 24
+        git clone --branch v5.2.3 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-idf.git --jobs 24
         
         echo "✅ 🐑 🐑 ESP-IDF cloned successfully."
         echo
@@ -169,7 +169,7 @@ install_ESP_Matter_SDK() {
         echo "🐑 Cloning ESP-Matter repository..."
         echo
                 
-        git clone --branch release/v1.3 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-matter.git --jobs 24
+        git clone --branch release/v1.4 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-matter.git --jobs 24
         echo "✅ 🐑 🐑 ESP-Matter cloned successfully."
         echo
     else
