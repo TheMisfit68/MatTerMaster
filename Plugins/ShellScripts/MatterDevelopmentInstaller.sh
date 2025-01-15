@@ -141,7 +141,7 @@ install_ESP_IDF_SDK() {
         echo "🐑 Cloning ESP-IDF repository..."
         echo
         
-        git clone --branch v5.2.3 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-idf.git --jobs 24
+        git clone --branch v5.2.3 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-idf.git --jobs 4
         
         echo "✅ 🐑 🐑 ESP-IDF cloned successfully."
         echo
@@ -169,7 +169,7 @@ install_ESP_Matter_SDK() {
         echo "🐑 Cloning ESP-Matter repository..."
         echo
                 
-        git clone --branch release/v1.4 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-matter.git --jobs 24
+        git clone --branch release/v1.4 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-matter.git --jobs 4
         echo "✅ 🐑 🐑 ESP-Matter cloned successfully."
         echo
     else
@@ -178,13 +178,13 @@ install_ESP_Matter_SDK() {
     fi
 
     # Discard all changes in the checked out CHIP-submodule
-    # it sometimes is in a dirty state after cloning the ESP-Matter repository
-    echo "⏬️ Discarding all changes in the GIT submodules..."
-	cd "$ESP_MATTER_REPO/connectedhomeip/connectedhomeip" || exit 1
-	git submodule update --init --recursive
-	git submodule foreach --recursive git reset --hard
-	echo "✅ GIT changes discarded successfully."
-    echo
+    # it sometimes is in a dirty state after cloning the ESP	-Matter repository
+#    echo "⏬️ Discarding all changes in the GIT submodules..."
+#	cd "$ESP_MATTER_REPO/connectedhomeip/connectedhomeip" || exit 1
+#	git submodule update --init --recursive
+#	git submodule foreach --recursive git reset --hard
+#	echo "✅ GIT changes discarded successfully."
+#    echo
 
     # Install ESP-Matter if the install script exists
     echo "📦 Installing ESP-MATTER SDK..."
