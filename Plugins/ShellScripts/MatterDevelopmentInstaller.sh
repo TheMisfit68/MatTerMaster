@@ -141,7 +141,7 @@ install_ESP_IDF_SDK() {
         echo "🐑 Cloning ESP-IDF repository..."
         echo
         
-        git clone --branch release/v5.4 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-idf.git --jobs 4
+        git clone --branch v5.2.1 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-idf.git --jobs 4
         
         echo "✅ 🐑 🐑 ESP-IDF cloned successfully."
         echo
