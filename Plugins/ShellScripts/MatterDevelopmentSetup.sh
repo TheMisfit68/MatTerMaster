@@ -53,8 +53,11 @@ setupMatterEnvironment() {
 	echo
 	cd "$ESP_IDF_REPO"
 	source "$ESP_IDF_EXPORT"
+	
+	# Capture the resulting idf.py version
+	IDF_PY_VERSION=$(idf.py --version)
 	echo
-	echo "✅ ESP-IDF environment set up."
+	echo "✅ $IDF_PY_VERSION environment set up."
 	else
 	warnAndExitScript "ESP-IDF setup script not found at $ESP_IDF_EXPORT."
 	fi
