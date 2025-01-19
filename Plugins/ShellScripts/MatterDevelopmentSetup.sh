@@ -147,13 +147,18 @@ setup_aliases() {
 	# Check if the shell is interactive before setting up aliases
 	case $- in
 	*i*)
+	
 	alias install="install" # You can add true as an argument, when you use the alias, to force a complete reinstall
 	alias setup='setupMatterEnvironment'
 	alias clean='cleanBuildFolder'
 	alias build='buildProjectForBoard'
-	alias config='idf.py menuconfig'
 	alias flash='flashFirmware'
 	alias erase='eraseFirmware'
+	
+	alias config='idf.py menuconfig'# Opens the project configuration menu
+	alias size='idf.py size' # Displays the size information of the built firmware
+	alias app='idf.py app' # Manages applications in the project
+	alias app='idf.py component' # Manages components in the project
 	
 	source "$SCRIPTS_DIR/MatterDevelopmentUserAliases.sh"
 	
