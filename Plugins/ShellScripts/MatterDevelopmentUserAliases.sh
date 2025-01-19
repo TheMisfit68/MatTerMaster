@@ -22,8 +22,6 @@ alias testidf='navigateTo $HOME/esp/esp-idf/examples/get-started/blink && clean 
 alias testmatter='navigateTo $HOME/esp/esp-matter/examples/light && clean && build'
 alias testapple='navigateTo $HOME/Apple-swift-matter/swift-matter-examples/led-blink && clean && build'
 alias testsmart='navigateTo $HOME/Apple-swift-matter/swift-matter-examples/smart-light && clean && build'
-alias testjv='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterTest && clean && build'
-alias testswitch='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterGenericSwitch && clean && build'
 
 
 # Navigate within my own Matter projects
@@ -31,6 +29,9 @@ alias projectFolder='navigateTo $HOME/JVEmbedded/JVMatter/Sources/'
 alias blinker='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterBlinker'
 alias glower='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterGlower'
 alias switch='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterGenericSwitch'
+
+alias testjv='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterTest && clean && build'
+alias testswitch='navigateTo $HOME/JVEmbedded/JVMatter/Sources/MatterGenericSwitch && clean && build'
 
 
 
