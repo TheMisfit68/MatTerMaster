@@ -148,17 +148,15 @@ setup_aliases() {
 	case $- in
 	*i*)
 	
-	alias install="install" # You can add true as an argument, when you use the alias, to force a complete reinstall
+	alias install='install' # You can add true as an argument, when you use the alias, to force a complete reinstall
 	alias setup='setupMatterEnvironment'
 	alias clean='cleanBuildFolder'
 	alias build='buildProjectForBoard'
 	alias flash='flashFirmware'
 	alias erase='eraseFirmware'
-	
-	alias config='idf.py menuconfig'# Opens the project configuration menu
-	alias size='idf.py size' # Displays the size information of the built firmware
-	alias app='idf.py app' # Manages applications in the project
-	alias app='idf.py component' # Manages components in the project
+	alias monitor='idf.py monitor' # Connects the terminal to the serial port of the target device
+	alias config='idf.py menuconfig' # Opens the project configuration menu
+	alias build1='idf.py uf2' # Converts the firmware to a single UF2 (USB Flashing Format) file, usable for flashing and for WokWi simulations
 	
 	source "$SCRIPTS_DIR/MatterDevelopmentUserAliases.sh"
 	
