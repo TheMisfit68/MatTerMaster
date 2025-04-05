@@ -141,7 +141,7 @@ install_ESP_IDF_SDK() {
         echo "🐑 Cloning ESP-IDF repository..."
         echo
         
-        git clone --branch v5.2.1 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-idf.git --jobs 4
+        git clone --branch v5.2.3 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-idf.git --jobs 4
         
         echo "✅ 🐑 🐑 ESP-IDF cloned successfully."
         echo
@@ -169,7 +169,7 @@ install_ESP_Matter_SDK() {
         echo "🐑 Cloning ESP-Matter repository..."
         echo
                 
-        git clone --branch release/v1.3 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-matter.git --jobs 4
+        git clone --branch release/v1.4 --depth 1 --shallow-submodules --recursive https://github.com/espressif/esp-matter.git --jobs 4
         echo "✅ 🐑 🐑 ESP-Matter cloned successfully."
         echo
     else
@@ -207,6 +207,10 @@ install() {
     # 4. Check if cleanInstall parameter is passed and if so remove any old SDK's and tools
     local cleanInstall=$1
     if [[ "$cleanInstall" == "true" ]]; then
+		echo "⏸️ Deactivating existing virtual environment..."
+        deactivate 2>/dev/null || true
+        unset IDF_PATH
+        echo "✅ ⏸️ virtual environment deactivated."
         echo "🗑️ Deleting existing frameworks and tools folders..."
         rm -rf "$ESP_IDF_REPO" "$ESP_MATTER_REPO" "$ESP_TOOLS_DIR" || warnAndExitScript "Failed to remove old frameworks and tools."
         echo "✅ 🗑️ Old frameworks and tools folders deleted."
